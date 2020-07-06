@@ -5,15 +5,23 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    public float crouch_offset_y;
+    public float crouch_size_y;
+    private BoxCollider2D collide;
+    private float original_offset_y;
+    private float original_size_y;
 
-    // Update is called once per frame
+
+    void Start()
+    {
+         collide= gameObject.GetComponent<BoxCollider2D>();
+        original_offset_y = collide.offset.y;
+        original_size_y = collide.size.y;
+    }
     void Update()
     {
-        //Speed code
         PlayerRun();
-        //Jump code
         PlayerJump();
-        //Crouch code
         PlayerCrouch();
     }
 
@@ -36,19 +44,18 @@ public class PlayerController : MonoBehaviour
     
     void PlayerCrouch()
     {
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
 
-        if (Input.GetKey(KeyCode.LeftControl) == true)
+        if (Input.GetKey(KeyCode.LeftControl))
         {
             animator.SetBool("isCrouch", true);
-            collider.offset = new Vector2(collider.offset.x, 0.6f);
-            collider.size = new Vector2(collider.size.x, 1.3f);
+            collide.offset = new Vector2(collide.offset.x, crouch_offset_y);
+            collide.size = new Vector2(collide.size.x, crouch_size_y);
         }
         else
         {
             animator.SetBool("isCrouch", false);
-            collider.offset = new Vector2(collider.offset.x, 1f);
-            collider.size = new Vector2(collider.size.x, 2f);
+            collide.offset = new Vector2(collide.offset.x, original_offset_y);
+            collide.size = new Vector2(collide.size.x, original_size_y);
         }
 
     }
