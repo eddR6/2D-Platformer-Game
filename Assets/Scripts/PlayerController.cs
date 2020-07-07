@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,14 +8,18 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public float crouch_offset_y;
     public float crouch_size_y;
+    public float player_speed;
+    public float jump_force;
     private BoxCollider2D collide;
     private float original_offset_y;
     private float original_size_y;
-
+    private Rigidbody2D rigid;
+    private bool onGround;
 
     void Start()
     {
-         collide= gameObject.GetComponent<BoxCollider2D>();
+        collide= gameObject.GetComponent<BoxCollider2D>();
+        rigid = gameObject.GetComponent<Rigidbody2D>();
         original_offset_y = collide.offset.y;
         original_size_y = collide.size.y;
     }
@@ -25,21 +30,38 @@ public class PlayerController : MonoBehaviour
         PlayerCrouch();
     }
 
-    void PlayerRun()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        float speed = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", Mathf.Abs(speed));
+        onGround = true;
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        onGround = false;
+    }
+
+    void HorizontalMovement(float horizontal)
+    {
+        Vector2 position = transform.position; //x and y axis
+        position.x += horizontal * player_speed * Time.deltaTime;
+        transform.position = position;
+    }
+
+    void PlayerRun()
+    {   //Animation
+        float horizontal= Input.GetAxisRaw("Horizontal");
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
         Vector3 scale = transform.localScale;
-        if (speed > 0)
+        if (horizontal > 0)
         {
             scale.x = Mathf.Abs(scale.x);
         }
-        else if (speed < 0)
+        else if (horizontal < 0)
         {
             scale.x = -1f * Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
-
+        //Movement
+        HorizontalMovement(horizontal);
     }
     
     void PlayerCrouch()
@@ -71,6 +93,17 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Jump", false);
         }
-
+        JumpMovement(vertical);
     }
+
+    void JumpMovement(float vertical)
+    {
+        if (vertical > 0)
+        {
+            if (onGround)
+            rigid.AddForce(new Vector2(0f,jump_force), ForceMode2D.Force);
+        }
+    }
+
+    
 }
