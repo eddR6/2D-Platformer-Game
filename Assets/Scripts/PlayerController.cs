@@ -6,22 +6,24 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
-    public float crouch_offset_y;
-    public float crouch_size_y;
-    public float player_speed;
-    public float jump_force;
+    public float crouchOffsetY;
+    public float crouchSizeY;
+    public float playerSpeed;
+    public float jumpForce;
     private BoxCollider2D collide;
-    private float original_offset_y;
-    private float original_size_y;
-    private Rigidbody2D rigid;
+    private float originalOffsetY;
+    private float originalSizeY;
+    private Rigidbody2D rigidBody2d;
     private bool onGround;
+    private bool jumpCalled;
 
     void Start()
     {
         collide= gameObject.GetComponent<BoxCollider2D>();
-        rigid = gameObject.GetComponent<Rigidbody2D>();
-        original_offset_y = collide.offset.y;
-        original_size_y = collide.size.y;
+        rigidBody2d = gameObject.GetComponent<Rigidbody2D>();
+        originalOffsetY = collide.offset.y;
+        originalSizeY = collide.size.y;
+        jumpCalled = false;
     }
     void Update()
     {
@@ -30,19 +32,12 @@ public class PlayerController : MonoBehaviour
         PlayerCrouch();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        onGround = true;
-    }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        onGround = false;
-    }
+    
 
     void HorizontalMovement(float horizontal)
     {
         Vector2 position = transform.position; //x and y axis
-        position.x += horizontal * player_speed * Time.deltaTime;
+        position.x += horizontal * playerSpeed * Time.deltaTime;
         transform.position = position;
     }
 
@@ -70,21 +65,21 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftControl))
         {
             animator.SetBool("isCrouch", true);
-            collide.offset = new Vector2(collide.offset.x, crouch_offset_y);
-            collide.size = new Vector2(collide.size.x, crouch_size_y);
+            collide.offset = new Vector2(collide.offset.x, crouchOffsetY);
+            collide.size = new Vector2(collide.size.x, crouchSizeY);
         }
         else
         {
             animator.SetBool("isCrouch", false);
-            collide.offset = new Vector2(collide.offset.x, original_offset_y);
-            collide.size = new Vector2(collide.size.x, original_size_y);
+            collide.offset = new Vector2(collide.offset.x, originalOffsetY);
+            collide.size = new Vector2(collide.size.x, originalSizeY);
         }
 
     }
 
     void PlayerJump()
     {
-        float vertical = Input.GetAxisRaw("Jump");
+        float vertical = Input.GetAxis("Jump");
         if (vertical>0)
         {
             animator.SetBool("Jump", true);
@@ -98,12 +93,34 @@ public class PlayerController : MonoBehaviour
 
     void JumpMovement(float vertical)
     {
-        if (vertical > 0)
+        if (vertical>0)
         {
-            if (onGround)
-            rigid.AddForce(new Vector2(0f,jump_force), ForceMode2D.Force);
+            //jumpCalled is avoid 2-3 times added force which has something to do with jump axis
+            if (onGround && !jumpCalled) {
+                rigidBody2d.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
+                Debug.Log("---??"+vertical);
+                jumpCalled = true;
+            }
+
+        }
+        else
+        {
+            jumpCalled = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            onGround = true;
+        }
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            onGround = false;
         }
     }
 
-    
 }
