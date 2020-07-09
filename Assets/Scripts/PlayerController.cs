@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -30,10 +31,18 @@ public class PlayerController : MonoBehaviour
         PlayerRun();
         PlayerJump();
         PlayerCrouch();
+        LevelReloadOnDeath();
     }
 
     
-
+    void LevelReloadOnDeath()
+    {
+        if (transform.position.y < -9.0f)
+        {
+            Debug.Log("Player Dead!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+    }
     void HorizontalMovement(float horizontal)
     {
         Vector2 position = transform.position; //x and y axis
@@ -76,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
     }
-
+    
     void PlayerJump()
     {
         float vertical = Input.GetAxis("Jump");
@@ -98,7 +107,7 @@ public class PlayerController : MonoBehaviour
             //jumpCalled is avoid 2-3 times added force which has something to do with jump axis
             if (onGround && !jumpCalled) {
                 rigidBody2d.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
-                Debug.Log("---??"+vertical);
+                Debug.Log("Jumped");
                 jumpCalled = true;
             }
 
