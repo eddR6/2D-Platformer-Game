@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class LevelOverTrigger : MonoBehaviour
+public class LoadSceneOnTrigger : MonoBehaviour
 {
     public string sceneToLoad;
     

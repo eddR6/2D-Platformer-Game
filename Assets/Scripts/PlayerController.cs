@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     private float originalSizeY;
     private Rigidbody2D rigidBody2d;
     private bool onGround;
-    private bool jumpCalled;
+    private int groundLayer;
 
     void Start()
     {
@@ -24,25 +24,16 @@ public class PlayerController : MonoBehaviour
         rigidBody2d = gameObject.GetComponent<Rigidbody2D>();
         originalOffsetY = collide.offset.y;
         originalSizeY = collide.size.y;
-        jumpCalled = false;
+        groundLayer = LayerMask.NameToLayer("Ground");
+      
     }
     void Update()
     {
         PlayerRun();
         PlayerJump();
         PlayerCrouch();
-        LevelReloadOnDeath();
     }
 
-    
-    void LevelReloadOnDeath()
-    {
-        if (transform.position.y < -9.0f)
-        {
-            Debug.Log("Player Dead!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
     void HorizontalMovement(float horizontal)
     {
         Vector2 position = transform.position; //x and y axis
@@ -97,36 +88,30 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("Jump", false);
         }
-        JumpMovement(vertical);
+        JumpMovement();
     }
 
-    void JumpMovement(float vertical)
+    void JumpMovement()
     {
-        if (vertical>0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            //jumpCalled is avoid 2-3 times added force which has something to do with jump axis
-            if (onGround && !jumpCalled) {
+             if (onGround) {
                 rigidBody2d.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Force);
                 Debug.Log("Jumped");
-                jumpCalled = true;
-            }
+             }
 
-        }
-        else
-        {
-            jumpCalled = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == groundLayer)
         {
             onGround = true;
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 8)
+        if (collision.gameObject.layer == groundLayer)
         {
             onGround = false;
         }
