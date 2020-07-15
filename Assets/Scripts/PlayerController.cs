@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rigidBody2d;
     private bool onGround;
     private int groundLayer;
+    private int health;
+    
 
     void Start()
     {
@@ -25,13 +27,22 @@ public class PlayerController : MonoBehaviour
         originalOffsetY = collide.offset.y;
         originalSizeY = collide.size.y;
         groundLayer = LayerMask.NameToLayer("Ground");
-      
+        health = 3;
     }
     void Update()
     {
         PlayerRun();
         PlayerJump();
         PlayerCrouch();
+    }
+
+    public void DecreaseHealth(int n)
+    {
+        health = health + n;
+    }
+    public int GetHealth()
+    {
+        return health;
     }
 
     void HorizontalMovement(float horizontal)

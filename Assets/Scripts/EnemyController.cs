@@ -8,10 +8,15 @@ public class EnemyController : MonoBehaviour
 {
     public float walkSpeed;
     private float direction;
+    public PlayerController playerController;
+    public HealthController healthController;
+    public GameObject gameOver;
 
     void Start()
     {
         direction = 1.0f;
+       
+        
     }
 
     void Update()
@@ -34,14 +39,26 @@ public class EnemyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        LevelReload(collision);
+        if (collision.gameObject.GetComponent<PlayerController>() != null)
+        {
+            int health = playerController.GetHealth();
+            if (health > 0)
+            {
+                playerController.DecreaseHealth(-1);
+                healthController.UpdateLives(health - 1);
+                if (health - 1 == 0)
+                {
+
+                    GameOverUI();
+                }
+            }
+            
+        }
     }
 
-    void LevelReload(Collision2D collision)
+    void GameOverUI()
     {
-        if(collision.gameObject.GetComponent<PlayerController>() != null)
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
+        playerController.enabled = false;
+        gameOver.SetActive(true);
     }
 }
