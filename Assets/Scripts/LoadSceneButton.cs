@@ -6,20 +6,20 @@ using UnityEngine.Events;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Button))]
 public class LoadSceneButton : MonoBehaviour
 {
-    public Button button;
+    private Button button;
     public string sceneToLoad;
 
     private void Start()
     {
+        button = gameObject.GetComponent<Button>();
         button.onClick.AddListener(ReloadGame);
-        Debug.Log("hh");
     }
 
     private void ReloadGame()
     {
-        Debug.Log("GG");
         SceneManager.LoadScene(sceneToLoad);
     }
 }
