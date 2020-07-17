@@ -368,7 +368,7 @@ RectTransform:
   m_GameObject: {fileID: 234545045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children:
   - {fileID: 19777383}
   - {fileID: 795053799}
@@ -378,7 +378,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 138.9, y: 5.2}
+  m_AnchoredPosition: {x: -119, y: 4}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &234545047
@@ -393,6 +393,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eaf13b2c0f18df419f450103c884957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health:
+  - {fileID: 19777382}
+  - {fileID: 795053798}
+  - {fileID: 297294024}
 --- !u!1 &297294024
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,11 +557,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6668519654951743820, guid: c1e0e281d7d905247bb2a192f7b82ebe,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 1538969605, guid: c1e0e281d7d905247bb2a192f7b82ebe, type: 3}
+      propertyPath: healthController
+      value: 
+      objectReference: {fileID: 234545047}
+    - target: {fileID: 1538969605, guid: c1e0e281d7d905247bb2a192f7b82ebe, type: 3}
+      propertyPath: overController
+      value: 
+      objectReference: {fileID: 813834171}
     - target: {fileID: 7820891083074919421, guid: c1e0e281d7d905247bb2a192f7b82ebe,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -845,18 +852,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1960560262}
     m_Modifications:
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 410697679}
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: healthController
-      value: 
-      objectReference: {fileID: 234545047}
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 813834169}
     - target: {fileID: 8381010855570439597, guid: eeecf425f632d6a4db4b63a98c25efac,
         type: 3}
       propertyPath: m_Name
@@ -1146,11 +1141,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 813834169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a9be274fa02fa44599e0b46cfc5ab72, type: 3}
+  m_Script: {fileID: 11500000, guid: bd8f6a49391c6264fb4eaa2147a9aae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1782311830}
-  sceneToLoad: 
 --- !u!4 &823865611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6999983852412486465, guid: 1cf56cfd03fdf0f48b3f23491309abd3,
@@ -3244,18 +3238,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1960560262}
     m_Modifications:
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: playerController
-      value: 
-      objectReference: {fileID: 410697679}
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: healthController
-      value: 
-      objectReference: {fileID: 234545047}
-    - target: {fileID: 629512228, guid: eeecf425f632d6a4db4b63a98c25efac, type: 3}
-      propertyPath: gameOver
-      value: 
-      objectReference: {fileID: 813834169}
     - target: {fileID: 8381010855570439597, guid: eeecf425f632d6a4db4b63a98c25efac,
         type: 3}
       propertyPath: m_Name

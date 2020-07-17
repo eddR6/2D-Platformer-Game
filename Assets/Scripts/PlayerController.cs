@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float crouchSizeY;
     public float playerSpeed;
     public float jumpForce;
+    public HealthController healthController;
+    public GameOverController overController;
     private BoxCollider2D collide;
     private float originalOffsetY;
     private float originalSizeY;
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private bool onGround;
     private int groundLayer;
     private int health;
+    private int maxHealth;
     
 
     void Start()
@@ -27,18 +30,29 @@ public class PlayerController : MonoBehaviour
         originalOffsetY = collide.offset.y;
         originalSizeY = collide.size.y;
         groundLayer = LayerMask.NameToLayer("Ground");
-        health = 3;
-    }
+        maxHealth = healthController.MaxHealth();
+        health = maxHealth;
+    }   
     void Update()
     {
         PlayerRun();
         PlayerJump();
         PlayerCrouch();
     }
-
-    public void DecreaseHealth(int n)
+     
+    public void UpdateHealth(int h)
     {
-        health = health + n;
+        
+        if (health > 0)
+        {
+            health = health + h;
+            healthController.UpdateLives(health);
+            if (health == 0)
+            {
+                gameObject.GetComponent<PlayerController>().enabled = false;
+                overController.GameOverPopUp();
+            }
+        }
     }
     public int GetHealth()
     {
