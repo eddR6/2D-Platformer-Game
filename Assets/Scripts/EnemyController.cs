@@ -7,22 +7,25 @@ using UnityEngine.SceneManagement;
 public class EnemyController : MonoBehaviour
 {
     public float walkSpeed;
+    public int damageValue;
     private float direction;
 
     void Start()
     {
         direction = 1.0f;
+
+
     }
 
     void Update()
     {
         EnemyWalk();
-        
+
     }
     void EnemyWalk()
     {
         Vector2 position = transform.position;
-        position.x+= direction * walkSpeed * Time.deltaTime;
+        position.x += direction * walkSpeed * Time.deltaTime;
         transform.position = position;
     }
     public void Flip()
@@ -34,14 +37,10 @@ public class EnemyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        LevelReload(collision);
-    }
-
-    void LevelReload(Collision2D collision)
-    {
-        if(collision.gameObject.GetComponent<PlayerController>() != null)
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        if (playerController != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            playerController.UpdateHealth(-(damageValue));
         }
     }
 }

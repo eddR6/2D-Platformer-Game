@@ -11,12 +11,17 @@ public class PlayerController : MonoBehaviour
     public float crouchSizeY;
     public float playerSpeed;
     public float jumpForce;
+    public HealthController healthController;
+    public GameOverController overController;
     private BoxCollider2D collide;
     private float originalOffsetY;
     private float originalSizeY;
     private Rigidbody2D rigidBody2d;
     private bool onGround;
     private int groundLayer;
+    private int health;
+    private int maxHealth;
+    
 
     void Start()
     {
@@ -25,13 +30,33 @@ public class PlayerController : MonoBehaviour
         originalOffsetY = collide.offset.y;
         originalSizeY = collide.size.y;
         groundLayer = LayerMask.NameToLayer("Ground");
-      
-    }
+        maxHealth = healthController.MaxHealth();
+        health = maxHealth;
+    }   
     void Update()
     {
         PlayerRun();
         PlayerJump();
         PlayerCrouch();
+    }
+     
+    public void UpdateHealth(int h)
+    {
+        
+        if (health > 0)
+        {
+            health = health + h;
+            healthController.UpdateLives(health);
+            if (health == 0)
+            {
+                gameObject.GetComponent<PlayerController>().enabled = false;
+                overController.GameOverPopUp();
+            }
+        }
+    }
+    public int GetHealth()
+    {
+        return health;
     }
 
     void HorizontalMovement(float horizontal)
