@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class HealthController : MonoBehaviour
     {
        for(int i = 1; i <= health.Length; i++)
         {
-            health[i-1].SetActive(i <= h);
+            health[i-1].GetComponent<Image>().enabled=(i <= h);
         }
     }
 
