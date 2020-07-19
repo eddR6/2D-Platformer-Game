@@ -6,12 +6,14 @@ public class CollectibleBehaviour : MonoBehaviour
 {
     public int collectiblePoints;
     public ScoreController scoreController;
-    void OnCollisionEnter2D(Collision2D collision)
+  
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("hh");
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
             scoreController.ScoreToAdd(collectiblePoints);
             Destroy(gameObject);
-        }    
+        }
     }
 }
