@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed;
     public float jumpForce;
     public HealthController healthController;
-    public GameOverController overController;
+    public NavigationMenu gameOver;
     private BoxCollider2D collide;
     private float originalOffsetY;
     private float originalSizeY;
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             if (health == 0)
             {
                 gameObject.GetComponent<PlayerController>().enabled = false;
-                overController.GameOverPopUp();
+                gameOver.NavigationEnable();
             }
         }
     }
