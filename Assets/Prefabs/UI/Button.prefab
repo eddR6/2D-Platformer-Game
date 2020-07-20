@@ -148,7 +148,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 1
+  m_Text: Level 2
 --- !u!1 &4005778879156410048
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 459657794818106714}
   - component: {fileID: 3914141039040447957}
   - component: {fileID: 8531296744473992979}
-  - component: {fileID: 2288463791076431595}
+  - component: {fileID: 4342774256260184255}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -237,7 +237,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2288463791076431595
+--- !u!114 &4342774256260184255
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,7 +246,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4005778879156410048}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a9be274fa02fa44599e0b46cfc5ab72, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a067523d722df9469a2960f04fbe16d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: Level_1
+  levelName: Level_1
