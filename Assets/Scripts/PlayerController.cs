@@ -73,17 +73,32 @@ public class PlayerController : MonoBehaviour
         Vector3 scale = transform.localScale;
         if (horizontal > 0)
         {
+            PlayerMovementSound();
             scale.x = Mathf.Abs(scale.x);
         }
         else if (horizontal < 0)
         {
+            PlayerMovementSound();
             scale.x = -1f * Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
         //Movement
+        
         HorizontalMovement(horizontal);
     }
-    
+
+    private void PlayerMovementSound()
+    {
+        Debug.Log("soundout");
+        SoundManager soundManager = SoundManager.Instance;
+        if(onGround && !soundManager.soundEffect.isPlaying)
+        {
+            Debug.Log("sound");
+            soundManager.soundEffect.pitch = UnityEngine.Random.Range(1.4f, 2.0f);
+            soundManager.Play(Sounds.PlayerMove);
+        }
+    }
+
     void PlayerCrouch()
     {
 

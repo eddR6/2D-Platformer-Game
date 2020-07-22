@@ -20,6 +20,7 @@ public class LoadSceneButton : MonoBehaviour
 
     private void ReloadGame()
     {
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         SceneManager.LoadScene(sceneToLoad);
     }
 }

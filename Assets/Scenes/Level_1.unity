@@ -387,22 +387,18 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 234545047}
     - target: {fileID: 1538969605, guid: c1e0e281d7d905247bb2a192f7b82ebe, type: 3}
-      propertyPath: overController
-      value: 
-      objectReference: {fileID: 813834171}
-    - target: {fileID: 1538969605, guid: c1e0e281d7d905247bb2a192f7b82ebe, type: 3}
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 813834171}
     - target: {fileID: 7820891083074919421, guid: c1e0e281d7d905247bb2a192f7b82ebe,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.17
+      value: -5.65
       objectReference: {fileID: 0}
     - target: {fileID: 7820891083074919421, guid: c1e0e281d7d905247bb2a192f7b82ebe,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.02
+      value: -2.39
       objectReference: {fileID: 0}
     - target: {fileID: 7820891083074919421, guid: c1e0e281d7d905247bb2a192f7b82ebe,
         type: 3}

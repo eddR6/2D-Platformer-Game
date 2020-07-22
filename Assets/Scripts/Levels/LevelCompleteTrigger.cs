@@ -22,6 +22,8 @@ public class LevelCompleteTrigger : MonoBehaviour
             levelCompleteMenu.NavigationEnable();
             //Debug.Log("Level Over!");
             //SceneManager.LoadScene(sceneToLoad);
+            //Sound
+            SoundManager.Instance.Play(Sounds.LevelComplete);
         }
     }
 }
