@@ -31,27 +31,35 @@ public class SoundManager : MonoBehaviour
     }
     public void Play(Sounds sound)
     {
-        AudioClip clip = GetSoundClip(sound);
-        if (clip != null)
+        SoundType soundType = GetSoundClip(sound);
+        if (soundType != null)
         {
-            soundEffect.PlayOneShot(clip);
+            soundEffect.loop = soundType.looping;
+            soundEffect.volume = soundType.volume;
+            soundEffect.PlayOneShot(soundType.soundClip);
         }
         else
         {
-            Debug.Log("Clip no found.");
+            Debug.LogWarning("Clip no found.");
         }
     }
     public void PlayMusic(Sounds sound)
     {
-        AudioClip soundClip = GetSoundClip(sound);
-        soundMusic.clip = soundClip;
-        soundMusic.volume = 0.4f;
+        SoundType soundType = GetSoundClip(sound);
+        soundMusic.clip = soundType.soundClip;
+        soundMusic.volume = soundType.volume;
+        soundMusic.loop = soundType.looping;
         soundMusic.Play();
     }
 
-    private AudioClip GetSoundClip(Sounds sound)
+    private SoundType GetSoundClip(Sounds sound)
     {
-        return Array.Find(SoundMap, item => item.soundType == sound).soundClip;
+        if (sound != null)
+        {
+            return Array.Find(SoundMap, item => item.soundType == sound);
+        }
+        return null;
+        
     }
 }
 [Serializable]
@@ -59,6 +67,9 @@ public class SoundType
 {
     public Sounds soundType;
     public AudioClip soundClip;
+    [Range(0.0f,1.0f)]
+    public float volume;
+    public bool looping;
 }
 
 public enum Sounds
