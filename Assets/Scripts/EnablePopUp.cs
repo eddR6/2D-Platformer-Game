@@ -18,6 +18,7 @@ public class EnablePopUp : MonoBehaviour
     
     void PopUp()
     {
+        SoundManager.Instance.Play(Sounds.ButtonClick);
         popUp.SetActive(true);
     }
 }
