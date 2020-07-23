@@ -634,14 +634,24 @@ MonoBehaviour:
   SoundMap:
   - soundType: 0
     soundClip: {fileID: 8300000, guid: df6d1af64fdebb04d80a54b27b720509, type: 3}
+    volume: 1
+    looping: 0
   - soundType: 4
     soundClip: {fileID: 8300000, guid: a4dc23583fb1dc84a89049f88b06efe8, type: 3}
+    volume: 1
+    looping: 0
   - soundType: 1
     soundClip: {fileID: 8300000, guid: 0651b56880a11ef45909b779443691aa, type: 3}
+    volume: 0.35
+    looping: 0
   - soundType: 2
     soundClip: {fileID: 8300000, guid: 234b586e812e70b419affbe33e30dcfe, type: 3}
+    volume: 1
+    looping: 0
   - soundType: 5
     soundClip: {fileID: 8300000, guid: 0cce91cb3c5bf814e805233571eab8ea, type: 3}
+    volume: 0.5
+    looping: 0
   soundEffect: {fileID: 1983128056}
   soundMusic: {fileID: 2130571010}
 --- !u!4 &685430416
