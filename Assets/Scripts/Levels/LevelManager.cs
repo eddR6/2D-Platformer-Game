@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get { return instance; } }
     public string Level1;
     public int totalLevels;
+    public LevelNames[] levelNames;
 
     private void Awake()
     {
@@ -61,5 +62,14 @@ public class LevelManager : MonoBehaviour
     {
         PlayerPrefs.SetInt(level, (int)status);
     }
-   
+   public string LevelDisplayName(string level)
+    {
+        return Array.Find(levelNames, item => item.level == level).levelName;
+    }
+}
+[Serializable]
+public class LevelNames
+{
+    public string level;
+    public string levelName;
 }

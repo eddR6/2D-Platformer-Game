@@ -6,13 +6,14 @@ using UnityEngine.SceneManagement;
 public class LoadSceneOnTrigger : MonoBehaviour
 {
     public string sceneToLoad;
+    public NavigationMenu gameOver;
+
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("Level Over!");
-            SceneManager.LoadScene(sceneToLoad);
+            collision.gameObject.GetComponent<PlayerController>().PlayerDead();  
         }
     }
 }
