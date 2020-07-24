@@ -21,7 +21,6 @@ public class PlayerController : MonoBehaviour
     private int groundLayer;
     private int health;
     private int maxHealth;
-    
 
     void Start()
     {
@@ -49,8 +48,7 @@ public class PlayerController : MonoBehaviour
             healthController.UpdateLives(health);
             if (health == 0)
             {
-                gameObject.GetComponent<PlayerController>().enabled = false;
-                gameOver.NavigationEnable();
+                PlayerDead();
             }
         }
     }
@@ -156,5 +154,20 @@ public class PlayerController : MonoBehaviour
             onGround = false;
         }
     }
+    public void PlayerDead()
+    {
+        gameObject.GetComponent<PlayerController>().enabled = false;
+        StartCoroutine(DeathAnimation());
+        
+    }
 
+    IEnumerator DeathAnimation()
+    {
+        animator.Play("Player_death");
+        yield return new WaitForSeconds(1f);
+        gameOver.NavigationEnable();
+    }
+    
+
+    
 }
