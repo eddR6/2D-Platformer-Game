@@ -2,7 +2,7 @@
 The game is about an android girl Ellen, whose goal is to complete her journey to the end. Surviving the unknown threats that are waiting for her ahead with each time she uses the portal to escape from one world to the other.\
 Here is the link to gameplay video:\
 https://www.linkedin.com/posts/adityajain400_unity2d-csharp-activity-6692482915512709120-YMoF
-# Objective
+# Objectives
 As a first project of mine in Unity, the aim here is to:\
 -Learn the basics of unity engine and C#.\
 -How to write optimized code in C# in context of Unity.\
