@@ -12,17 +12,17 @@ As a first project of mine in Unity, the aim here is to:\
 -Learn about Scenes management.\
 -Learn about basic Level Design.\
 -Work with Unity 2D Physics (along with triggers).\
--Implement basic collectible and enemy system.\
+-Implement basic collectible and enemy system.
 # Technologies Used
 -Unity\
 -C#\
 -Adobe Photoshop\
--iTweens (for UI animations)\
+-iTweens (for UI animations)
 # Future Aspects
 -Addition of Particle Effects for various in-game movements and mechanics\
 -Level Design improvements.\
 -Adding more complex in-game traps on each level.\
--Adding more sound effects.\
+-Adding more sound effects.
 
 
 
