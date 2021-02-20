@@ -8,11 +8,15 @@ public class ScoreController : MonoBehaviour
 {
     private int totalScore;
     private Text scoreText;
+
+    public int TotalScore { get => totalScore; set => totalScore = value; }
+    public Text ScoreText { get => scoreText; set => scoreText = value; }
+
     void Start()
     {
-        scoreText = gameObject.GetComponent<Text>();
-        totalScore = 0;
-        RefreshScore(totalScore);
+        ScoreText = gameObject.GetComponent<Text>();
+        TotalScore = 0;
+        RefreshScore(TotalScore);
         
     }
 
@@ -22,9 +26,9 @@ public class ScoreController : MonoBehaviour
 
     }
 
-    private void RefreshScore(int score)
+    public void RefreshScore(int score)
     {
-        totalScore += score;
-        scoreText.text = "Score: "+totalScore;
+        TotalScore += score;
+        ScoreText.text = "Score: "+TotalScore;
     }
 }

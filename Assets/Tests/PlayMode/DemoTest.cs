@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
+using UnityEngine.UI;
 
 namespace Tests
 {
     public class DemoTest
     {
-        // A Test behaves as an ordinary method
         [Test]
-        public void DemoTestSimplePasses()
+        public void DemoScoreUpdateTest()
         {
-            // Use the Assert class to test conditions
-        }
+            GameObject go = new GameObject();
+            ScoreController sc= go.AddComponent<ScoreController>();
 
-        // A UnityTest behaves like a coroutine in Play Mode. In Edit Mode you can use
-        // `yield return null;` to skip a frame.
-        [UnityTest]
-        public IEnumerator DemoTestWithEnumeratorPasses()
-        {
-            // Use the Assert class to test conditions.
-            // Use yield to skip a frame.
-            yield return null;
+            //setting text component
+            Text sctext=go.AddComponent<Text>();
+            sc.ScoreText = sctext;
+
+            sc.TotalScore = 10;
+            sc.RefreshScore(25);
+            Assert.AreEqual(35, sc.TotalScore);
+
         }
     }
 }
