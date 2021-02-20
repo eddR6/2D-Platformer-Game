@@ -2,15 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 
 public class ScoreController : MonoBehaviour
 {
     private int totalScore;
-    private TextMeshProUGUI scoreText;
+    private Text scoreText;
     void Start()
     {
-        scoreText = gameObject.GetComponent<TextMeshProUGUI>();
+        scoreText = gameObject.GetComponent<Text>();
         totalScore = 0;
         RefreshScore(totalScore);
         
